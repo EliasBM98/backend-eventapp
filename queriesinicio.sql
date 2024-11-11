@@ -30,7 +30,7 @@ name varchar (50) NOT NULL UNIQUE,
 description varchar (200)
 );
 
---Tabla 
+--Tabla --Ojo me falta meter team!!
 CREATE TABLE events (
 id serial NOT NULL PRIMARY KEY,
 name varchar (100) NOT NULL UNIQUE,

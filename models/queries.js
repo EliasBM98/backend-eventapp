@@ -44,19 +44,18 @@ const events = {
     WHERE id=$1  
     RETURNING *`,
 
-    editEvents:
-    `    UPDATE events
-        SET 
-            name='$1', 
-            description='$2', 
-            year='$3', 
-            start_date='$4', 
-            end_date='$5', 
-            event_phase='$6', 
-            event_type='$7', 
-            enterprise='$8',
-            chief='$9'
-	WHERE id='$1'
+    editEvents:`
+    UPDATE events
+    SET name=$2,
+        description=$3, 
+		year=$4, 
+	    start_date=$5, 
+		end_date=$6, 
+		event_phase=$7, 
+		event_type=$8, 
+		enterprise=$9,
+		chief=$10         
+	WHERE id=$1
     RETURNING *`,
 
 }

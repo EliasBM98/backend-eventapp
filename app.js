@@ -22,7 +22,7 @@ const port = process.env.PORT || 4000;
 
 /*Rutas*/
 
-//app.use ('/apigestion/v1/admin', require('./routers/apiRouterAdmin'))
+app.use ('/apigestion/v1/admin', require('./routers/apiRouterAdmin'))
 
 
 /*Servidor puesto a la escucha*/
