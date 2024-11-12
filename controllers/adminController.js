@@ -48,7 +48,7 @@ const getEventsByName = async (req, res) => {
         events = await getEventsByNameModel(name)
         return res.status(200).json({
             ok: true,
-            msg: 'Obteniendo pelicula',
+            msg: 'Obteniendo Evento',
             data: events
         })
     } catch (error) {
