@@ -11,6 +11,7 @@ const pool = new Pool({
         rejectUnauthorized: false 
     }*/
 })
+
 /**
  * Funcion para conectarse a BBDD.
  * 
@@ -23,7 +24,7 @@ const connect = async (consulta, variables=[]) =>{
     try {
         conection = await pool.connect()
         response = await conection.query(consulta, variables)
-        //console.log(response.rows)
+        console.log(response.rows)
         
     } catch (error) {
         console.log(error)

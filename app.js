@@ -6,13 +6,15 @@ const cors = require('cors');
 
 require('dotenv').config();
 
+
 /*Middlewares*/
-// parse application/x-www-form-urlencoded
+// parse application/x-www-form-urlencoded //Para capturar datos del formulario
 app.use(express.urlencoded({ extended: false }))
 
+//const WhiteList = [] y origin=WhiteList como argumento a cors 
 app.use(cors());
 
-// parse application/json
+// parse application/json //Para leer archivos json
 app.use(express.json())
 
 

@@ -10,11 +10,15 @@ const { events } = require('./queries');
  * 
  * @returns {Object} - Devuelve todos los eventos.
  */
-const getAllEventsModel = async () => {
+const getAllEventsModel = async (page) => {
     try {
-        let data = await connect(events.getAllEvents);
-        console.log(data.rows);
-        return data.rows;
+        let data = await connect(events.getAllEvents, [page]);
+        if (data){
+            console.log(data.rows);
+            return data.rows;
+        } else{
+            
+        }
     } catch (error) {
         console.log(error)
     }
@@ -30,10 +34,15 @@ const getAllEventsModel = async () => {
 const getEventsByNameModel = async (name) => {
     try {
         let data = await connect(events.getEventsByName, [name]);
-        console.log(data.rows);
-        return data.rows;
+        if (data) {
+            console.log(data.rows);
+            return data.rows;
+        } else{
+            throw error
+        }
     } catch (error) {
         console.log(error)
+        return error;
     }
 };
 
@@ -55,7 +64,12 @@ const getEventsByNameModel = async (name) => {
 const createEventsModel = async (name, description, year, start_date, end_date, event_phase, event_type, enterprise,chief) => {
     try {
         let data = await connect(events.createEvents, [ name, description, year, start_date, end_date, event_phase, event_type, enterprise, chief])
-        return data.rows;
+        if (data){
+            console.log(data.rows);
+            return data.rows;
+        } else{
+            throw error;
+        }
     } catch (error) {
         console.log(error)
     }
@@ -71,8 +85,12 @@ const createEventsModel = async (name, description, year, start_date, end_date, 
 const deleteEventsModel = async (id) => {
     try {
         let data = await connect(events.deleteEvents, [id]);
-        console.log(data.rows);
-        return data.rows
+        if(data){
+            console.log(data.rows);
+            return data.rows
+        } else{
+            throw error
+        }
     } catch (error) {
         console.log(error)
     }
@@ -97,8 +115,13 @@ const deleteEventsModel = async (id) => {
 const editEventsModel = async (id, name, description, year, start_date, end_date, event_phase, event_type, enterprise, chief) =>{
     try {
         let data = await connect(events.editEvents, [id, name, description, year, start_date, end_date, event_phase, event_type, enterprise, chief]);
-        console.log(data.rows);
-        return data.rows;
+        if (data){
+            console.log(data.rows);
+            return data.rows;
+        } else{
+            throw error
+        }
+
     } catch (error) {
         console.log(error);
     }

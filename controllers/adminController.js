@@ -16,14 +16,22 @@ const {
  * @returns {Object} - El objeto JSON con la respuesta.
  */
 const getEvents = async (req, res) => {
-    let events;
+    const page = req.params.page ? req.params.page : 0;
+
     try {
-        events = await getAllEventsModel()
+    let events = await getAllEventsModel(page);
+        if(events){
         return res.status(200).json({
             ok: true,
             msg: 'Obteniendo todos los eventos',
-            data: events
-        })
+            data: events,
+            total_pages: events.length
+        })} else{
+            return res.status (400).json({
+                ok:false,
+                msg: 'No se han obtenido eventos'
+            })
+        }
     } catch (error) {
         console.log (error);
         return res.status(500).json({
@@ -46,11 +54,18 @@ const getEventsByName = async (req, res) => {
     try {
         const name = req.body.name;
         events = await getEventsByNameModel(name)
-        return res.status(200).json({
-            ok: true,
-            msg: 'Obteniendo Evento',
-            data: events
-        })
+        if(events){
+            return res.status(200).json({
+                ok: true,
+                msg: 'Obteniendo Evento',
+                data: events
+            })
+        }else{
+            return res.status(400).json({
+                ok:false,
+                msg: 'No se han obtenido eventos por id'
+            })
+        }
     } catch (error) {
         console.log (error);
         return res.status(500).json({
@@ -88,11 +103,18 @@ const createEvent = async (req, res) => {
                                                     event_type, 
                                                     enterprise,
                                                     chief);
-        return res.status(201).json({
-            ok: true,
-            msg: 'Creando evento',
-            data: eventSaved
-        })
+        if(eventSaved){
+            return res.status(201).json({
+                ok: true,
+                msg: 'Creando evento',
+                data: eventSaved
+            })
+        }else{
+            return res.status (400).json({
+                ok:false,
+                msg: 'No se ha creado el evento'
+            })
+        }
     } catch (error) {
         console.log (error);
         return res.status(500).json({
@@ -115,17 +137,18 @@ const deleteEventById = async (req, res) => {
     try {
         const id = req.params.id;
         const deletedEvent = await deleteEventsModel(id);
-        if (!deletedEvent){
+        if(deletedEvent){
+            return res.status(200).json({
+                ok: true,
+                msg: 'Evento eliminado',
+                data: deletedEvent
+            });
+        }else{
             return res.status(404).json({
                 ok: false,
                 msg: "Evento no encontrado"
             })
-        };
-        return res.status(200).json({
-            ok: true,
-            msg: 'Evento eliminado',
-            data: deletedEvent
-        });
+        }
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -143,16 +166,22 @@ const deleteEventById = async (req, res) => {
  */
 const editEvent = async (req, res) => {
     const {name, description, year, start_date, end_date, event_phase, event_type, enterprise,chief}  = req.body;
-            
-    
+
     try {
         const id = req.params.id;
         const eventEdited = await editEventsModel(id, name, description, year, start_date, end_date, event_phase, event_type, enterprise,chief);
-        return res.status(200).json({
-            ok:true,
-            msg: 'Evento editado',
-            data: eventEdited
-        })
+        if(eventEdited){
+            return res.status(200).json({
+                ok:true,
+                msg: 'Evento editado',
+                data: eventEdited
+            })
+        }else{
+            return res.status(404).json({
+                ok: false,
+                msg: "Evento no encontrado"
+            })
+        }
     } catch (error) {
         console.log(error)
         return res.status(500).json({

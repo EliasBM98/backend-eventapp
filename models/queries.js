@@ -10,7 +10,9 @@ const events = {
     JOIN event_type ON events.event_type = event_type.id
     JOIN enterprise ON events.enterprise = enterprise.id
     JOIN users ON events.chief = users.id
-    ORDER BY events.name`,
+    ORDER BY events.name
+    LIMIT 2
+    OFFSET 2*$1`,
 
     getEventsByName:
     `SELECT 	events.*, 
