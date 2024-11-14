@@ -44,13 +44,13 @@ router.post('/createevent', [
                 .isLength({max:255}).withMessage('La descripción no debe exceder los 255 caracteres'),
         check('year')
                 .notEmpty().withMessage('Año de contratación requerido')
-                .isInt().withMessage('El año debe ser un numero'),
+                .isDate().withMessage('El año debe ser un numero'),
         check('start_date')
                 .notEmpty().withMessage('Fecha de inicio requerida')
-                .isInt().withMessage('La fecha debe ser un numero'),
+                .isDate().withMessage('La fecha debe ser un numero'),
         check('end_date')
                 .notEmpty().withMessage('Fecha de fin requerida')
-                .isInt().withMessage('La fecha debe ser un numero'), 
+                .isDate().withMessage('La fecha debe ser un numero'), 
         check('event_type')
                 .notEmpty().withMessage('Tipo de evento requerido')
                 .isLength({max:50}).withMessage('El tipo no puede exceder 50 caracteres'),
@@ -85,13 +85,13 @@ router.put('/editevent/:id', [
                 .isLength({max:255}).withMessage('La descripción no debe exceder los 255 caracteres'),
         check('year')
                 .notEmpty().withMessage('Año de contratación requerido')
-                .isInt().withMessage('El año debe ser un numero'),
+                .isDate().withMessage('El año debe ser un numero'),
         check('start_date')
                 .notEmpty().withMessage('Fecha de inicio requerida')
-                .isInt().withMessage('La fecha debe ser un numero'),
+                .isDate().withMessage('La fecha debe ser un numero'),
         check('end_date')
                 .notEmpty().withMessage('Fecha de fin requerida')
-                .isInt().withMessage('La fecha debe ser un numero'), 
+                .isDate().withMessage('La fecha debe ser un numero'), 
         check('event_type')
                 .notEmpty().withMessage('Tipo de evento requerido')
                 .isLength({max:50}).withMessage('El tipo no puede exceder 50 caracteres'),
