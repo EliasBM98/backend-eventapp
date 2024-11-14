@@ -2,6 +2,7 @@
 const {
         getAllEventsModel,
         getEventsByNameModel,
+        getEventsByIdModel,
         createEventsModel,
         deleteEventsModel,
         editEventsModel
@@ -54,6 +55,40 @@ const getEventsByName = async (req, res) => {
     try {
         const name = req.body.name;
         events = await getEventsByNameModel(name)
+        if(events){
+            return res.status(200).json({
+                ok: true,
+                msg: 'Obteniendo Evento',
+                data: events
+            })
+        }else{
+            return res.status(400).json({
+                ok:false,
+                msg: 'No se han obtenido eventos por name'
+            })
+        }
+    } catch (error) {
+        console.log (error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error en la conexion'
+        })
+    }
+};
+
+
+/**
+ * Controlador para obtener eventos por su name.
+ * 
+ * @param {Object} req - La solicitud.
+ * @param {Object} res - La respuesta.
+ * @returns {Object} - El objeto JSON con la respuesta.
+ */
+const getEventsById = async (req, res) => {
+    let events;
+    try {
+        const id = req.params.id;
+        events = await getEventsByIdModel(id)
         if(events){
             return res.status(200).json({
                 ok: true,
@@ -196,6 +231,7 @@ const editEvent = async (req, res) => {
 module.exports={
     getEvents,
     getEventsByName,
+    getEventsById,
     createEvent,
     deleteEventById,
     editEvent

@@ -46,6 +46,27 @@ const getEventsByNameModel = async (name) => {
     }
 };
 
+/**
+ *Funcion para obtener un evento por su Nombre
+ *  
+ * @param {Number} Id - Id del evento que se quiere encontrar.
+ * @returns {Object} - Eventos encontrados con ese nombre.
+ */
+const getEventsByIdModel = async (id) => {
+    try {
+        let data = await connect(events.getEventsById, [id]);
+        if (data) {
+            console.log(data.rows);
+            return data.rows;
+        } else {
+            throw error
+        }    
+    } catch (error) {
+        console.log(error)
+        return error;
+    }
+}
+
 
 /**
  * Crea nuevos eventos.
@@ -133,6 +154,7 @@ const editEventsModel = async (id, name, description, year, start_date, end_date
 module.exports={
                 getAllEventsModel,
                 getEventsByNameModel,
+                getEventsByIdModel,
                 createEventsModel,
                 deleteEventsModel,
                 editEventsModel

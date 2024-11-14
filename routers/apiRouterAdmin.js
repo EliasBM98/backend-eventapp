@@ -14,6 +14,7 @@ const {validateInputs} = require('../middlewares/validateInputs')
 const {
         getEvents,
         getEventsByName,
+        getEventsById,
         createEvent,
         deleteEventById,
         editEvent
@@ -34,6 +35,13 @@ router.get('/eventsname', [
                 .isLength({max:100}).withMessage('El titulo del evento no puede exceder 100 caracteres'),
         validateInputs
 ], getEventsByName);
+
+router.get('/eventsid/:id', [
+        check('id')
+        .notEmpty().withMessage('Id requerido')
+        .isInt().withMessage('El Id debe ser un numero'),
+validateInputs
+], getEventsById);
 
 router.post('/createevent', [
         check('name')

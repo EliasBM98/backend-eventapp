@@ -28,6 +28,20 @@ const events = {
     WHERE events.name ILIKE '%' || $1 || '%'
     ORDER BY events.name`,
 
+    getEventsById:     
+    `SELECT 	events.*, 
+                event_phase.name AS Phase, 
+                event_type.name AS Type, 
+                enterprise.name AS Enterprise, 
+                users.name AS Chief
+    FROM events
+    JOIN event_phase ON events.event_phase = event_phase.id
+    JOIN event_type ON events.event_type = event_type.id
+    JOIN enterprise ON events.enterprise = enterprise.id
+    JOIN users ON events.chief = users.id
+    WHERE events.id = ($1)
+    ORDER BY events.name`,
+
     createEvents:
     `INSERT INTO events (name, 
 					    description, 
