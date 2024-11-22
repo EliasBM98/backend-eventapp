@@ -70,8 +70,9 @@ VALUES
 ('Busqueda equipo técnico'),
 ('Preparación Material'),
 ('Montaje'),
-('Evento'),
+('Directo'),
 ('Desmontaje');
+
 
 --Event_type
 INSERT INTO event_type (name)
@@ -103,3 +104,5 @@ INSERT INTO events(name,
 					chief)
 VALUES
 ('Los 40 music awards', 'Gala de premios de los 40', '2024/10/10', '2024/10/12', '2024/10/14', 1, 1, 3, 2);
+('Combustibles 0', 'Presentacion combustibles sostenibles', '2025/10/10', '2025/10/12', '2025/10/14', 1, 5, 1, 2);
+('Promocion interna', 'Gala de promocion de empleados', '2024/06/10', '2024/06/10', '2024/06/10', 1, 5, 4, 2);

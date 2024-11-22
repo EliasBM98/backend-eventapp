@@ -1,9 +1,7 @@
 /*Importaciones*/
 const express = require('express');
 const app=express();
-
 const cors = require('cors');
-
 require('dotenv').config();
 
 
@@ -11,8 +9,12 @@ require('dotenv').config();
 // parse application/x-www-form-urlencoded //Para capturar datos del formulario
 app.use(express.urlencoded({ extended: false }))
 
-//const WhiteList = [] y origin=WhiteList como argumento a cors 
-app.use(cors());
+const WhiteList = ['http://localhost:5173/', '*']
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // parse application/json //Para leer archivos json
 app.use(express.json())
@@ -25,6 +27,7 @@ const port = process.env.PORT || 4000;
 /*Rutas*/
 
 app.use ('/apigestion/v1/admin', require('./routers/apiRouterAdmin'))
+//app.use ('/apigestion/v1/auth', require('./routers/apiAuthRouters'))
 
 
 /*Servidor puesto a la escucha*/

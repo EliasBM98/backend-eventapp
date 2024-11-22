@@ -11,8 +11,8 @@ const events = {
     JOIN enterprise ON events.enterprise = enterprise.id
     JOIN users ON events.chief = users.id
     ORDER BY events.name
-    LIMIT 2
-    OFFSET 2*$1`,
+    LIMIT 20
+    OFFSET 20*$1`,
 
     getEventsByName:
     `SELECT 	events.*, 
@@ -73,10 +73,32 @@ const events = {
 		chief=$10         
 	WHERE id=$1
     RETURNING *`,
+};
 
-}
+const auth = {
+    createUsers:`
+    INSERT INTO users ( name, 
+                        surname,
+                        email,
+                        password,
+                        role) 
+    VALUES ($1, $2, $3, $4, $5) 
+    RETURNING id`,
+
+    getUserByEmail:`
+    SELECT * 
+    FROM users 
+    WHERE email = $1`,
+
+    getProfileInfo:`
+    SELECT id, name, surname, email, role 
+    FROM users 
+    WHERE id = $1`,
+};
+
 
 
 module.exports={
-    events
+    events,
+    auth
 }

@@ -23,11 +23,12 @@ const getEvents = async (req, res) => {
     let events = await getAllEventsModel(page);
         if(events){
         return res.status(200).json({
-            ok: true,
-            msg: 'Obteniendo todos los eventos',
-            data: events,
-            total_pages: events.length
-        })} else{
+                ok: true,
+                msg: 'Obteniendo todos los eventos',
+                data: events,
+                total_pages: events.length
+            })
+        } else{
             return res.status (400).json({
                 ok:false,
                 msg: 'No se han obtenido eventos'
@@ -53,7 +54,7 @@ const getEvents = async (req, res) => {
 const getEventsByName = async (req, res) => {
     let events;
     try {
-        const name = req.body.name;
+        const name = req.params.name;
         events = await getEventsByNameModel(name)
         if(events){
             return res.status(200).json({
@@ -89,6 +90,7 @@ const getEventsById = async (req, res) => {
     try {
         const id = req.params.id;
         events = await getEventsByIdModel(id)
+        console.log(events,'en getEventById')
         if(events){
             return res.status(200).json({
                 ok: true,

@@ -4,7 +4,6 @@ const { connect } = require('../helpers/bbddconnect');
 /*Importacion queris sql*/
 const { events } = require('./queries');
 
-
 /**
  * Hace una consulta a la base de datos y obtiene todos los eventos
  * 
@@ -14,13 +13,15 @@ const getAllEventsModel = async (page) => {
     try {
         let data = await connect(events.getAllEvents, [page]);
         if (data){
-            console.log(data.rows);
+            // console.log(data.rows,'en getAllEventsModel');
             return data.rows;
         } else{
             
         }
     } catch (error) {
         console.log(error)
+        return error;
+       
     }
 };
 
@@ -57,7 +58,7 @@ const getEventsByIdModel = async (id) => {
         let data = await connect(events.getEventsById, [id]);
         if (data) {
             console.log(data.rows);
-            return data.rows;
+            return data.rows[0];
         } else {
             throw error
         }    
@@ -93,6 +94,7 @@ const createEventsModel = async (name, description, year, start_date, end_date, 
         }
     } catch (error) {
         console.log(error)
+        return error;
     }
 };
 

@@ -29,7 +29,7 @@ router.get('/events/:page', [
         validateInputs
 ], getEvents);
 
-router.get('/eventsname', [
+router.get('/eventsname/:name', [
         check('name')
                 .notEmpty().withMessage('Nombre del evento requerido')
                 .isLength({max:100}).withMessage('El titulo del evento no puede exceder 100 caracteres'),
