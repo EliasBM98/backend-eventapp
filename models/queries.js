@@ -81,8 +81,10 @@ const auth = {
                         surname,
                         email,
                         password,
-                        role) 
-    VALUES ($1, $2, $3, $4, $5) 
+                        role,
+                        job_position,
+                        user_function) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7) 
     RETURNING id`,
 
     getUserByEmail:`
@@ -91,9 +93,42 @@ const auth = {
     WHERE email = $1`,
 
     getProfileInfo:`
-    SELECT id, name, surname, email, role 
+    SELECT id, name, surname, email, role, job_position, user_function
     FROM users 
     WHERE id = $1`,
+
+    deleteUser:`
+    DELETE FROM users
+    WHERE id=$1  
+    RETURNING *`,
+    
+    getAllUsers:`
+    SELECT id, name, surname, email, role, job_position, user_function
+    FROM users
+    ORDER BY id`,
+
+    createUsers:
+    `INSERT INTO users (name, 
+					    surname, 
+					    email,
+                        password, 
+					    role, 
+					    job_position,
+                        user_function)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *`,
+
+    editUsers:`
+    UPDATE users
+    SET name=$2,
+        surname=$3, 
+		email=$4, 
+	    password=$5, 
+		role=$6, 
+		job_position=$7, 
+		user_function=$8       
+	WHERE id=$1
+    RETURNING *`
 };
 
 

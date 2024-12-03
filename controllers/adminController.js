@@ -79,7 +79,7 @@ const getEventsByName = async (req, res) => {
 
 
 /**
- * Controlador para obtener eventos por su name.
+ * Controlador para obtener eventos por su id.
  * 
  * @param {Object} req - La solicitud.
  * @param {Object} res - La respuesta.
