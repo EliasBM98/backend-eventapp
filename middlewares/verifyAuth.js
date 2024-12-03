@@ -1,6 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-// Middleware para verificar el token JWT
+/**
+ * Middleware para verificar el token JWT
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns {json}
+ */
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization'];
 
@@ -22,7 +29,13 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// Middleware para verificar roles específicos
+
+/**
+ * Middleware para verificar roles específicos
+ * 
+ * @param {string} role - Rol de la cuenta del usuario.
+ * @returns {json} 
+ */
 const verifyRole = (role) => (req, res, next) => {
   if (req.user.role !== role) {
     return res.status(403).json({ 

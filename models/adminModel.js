@@ -16,12 +16,11 @@ const getAllEventsModel = async (page) => {
             // console.log(data.rows,'en getAllEventsModel');
             return data.rows;
         } else{
-            
+            throw error
         }
     } catch (error) {
         console.log(error)
         return error;
-       
     }
 };
 
